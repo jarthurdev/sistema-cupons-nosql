@@ -14,6 +14,7 @@ export class CouponModel {
    */
   static async create(data) {
     const now = new Date();
+    const vencimento = new Date(now.getTime() + 24 * 60 * 60 * 1000)
     
     // Define estrutura padrão
     const item = {
@@ -34,9 +35,9 @@ export class CouponModel {
         used: 0 // Começa com 0
       },
 
-      createdAt: now.toISOString(),
+      createdAt: now.toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' }),
       // Calcula TTL (expira em X dias)
-      expiresAt: Math.floor(now.getTime() / 1000) + (data.validityHours * 3600)
+      expiresAt: vencimento.toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' }),
     };
 
     // Salva no DynamoDB
