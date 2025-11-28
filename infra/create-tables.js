@@ -1,85 +1,46 @@
-// Importa AWS SDK
-const AWS = require("aws-sdk");
+// src/scripts/create-table.js
+import { CreateTableCommand } from "@aws-sdk/client-dynamodb";
+import { client } from "../db.js";
 
-// Configuração para DynamoDB Local
-const dynamoDB = new AWS.DynamoDB({
-  region: "us-east-1",
-  endpoint: "http://localhost:8000",
-});
+export async function createCouponsTable() {
+  const command = new CreateTableCommand({
+    TableName: "Coupons",
+    AttributeDefinitions: [
+      { AttributeName: "couponId", AttributeType: "S" },
+      { AttributeName: "clientId", AttributeType: "S" },
+      { AttributeName: "status", AttributeType: "S" },
+    ],
+    KeySchema: [
+      { AttributeName: "couponId", KeyType: "HASH" },
+    ],
 
-// Nome da tabela
-const TABLE_NAME = "Coupons";
-
-// Configuração da tabela
-const params = {
-  TableName: TABLE_NAME,
-  KeySchema: [
-    { AttributeName: "PK", KeyType: "HASH" }, // Partition Key
-    { AttributeName: "SK", KeyType: "RANGE" }, // Sort Key
-  ],
-  AttributeDefinitions: [
-    { AttributeName: "PK", AttributeType: "S" },
-    { AttributeName: "SK", AttributeType: "S" },
-    { AttributeName: "clientId", AttributeType: "S" }, // para GSI1
-    { AttributeName: "status", AttributeType: "S" },   // para GSI2
-    { AttributeName: "date", AttributeType: "S" },     // para GSI3
-  ],
-  BillingMode: "PAY_PER_REQUEST", // sem precisar configurar capacidade
-  GlobalSecondaryIndexes: [
-    {
-      IndexName: "GSI1_Client",
-      KeySchema: [
-        { AttributeName: "clientId", KeyType: "HASH" },
-        { AttributeName: "createdAt", KeyType: "RANGE" },
-      ],
-      Projection: {
-        ProjectionType: "ALL",
+    GlobalSecondaryIndexes: [
+      {
+        IndexName: "ClientIndex",
+        KeySchema: [
+          { AttributeName: "clientId", KeyType: "HASH" },
+          { AttributeName: "status", KeyType: "RANGE" },
+        ],
+        Projection: { ProjectionType: "ALL" },
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+        },
       },
-    },
-    {
-      IndexName: "GSI2_Status",
-      KeySchema: [
-        { AttributeName: "status", KeyType: "HASH" },
-        { AttributeName: "expiresAt", KeyType: "RANGE" },
-      ],
-      Projection: {
-        ProjectionType: "ALL",
-      },
-    },
-    {
-      IndexName: "GSI3_Date",
-      KeySchema: [
-        { AttributeName: "date", KeyType: "HASH" },
-        { AttributeName: "PK", KeyType: "RANGE" },
-      ],
-      Projection: {
-        ProjectionType: "ALL",
-      },
-    },
-  ],
-  TimeToLiveSpecification: {
-    AttributeName: "expiresAt",
-    Enabled: true,
-  },
-};
+    ],
 
-// Função idempotente para criar a tabela
-const createTable = async () => {
+    ProvisionedThroughput: {
+      ReadCapacityUnits: 5,
+      WriteCapacityUnits: 5,
+    },
+  });
+
   try {
-    // Verifica se a tabela já existe
-    const existingTables = await dynamoDB.listTables({}).promise();
-    if (existingTables.TableNames.includes(TABLE_NAME)) {
-      console.log(`✅ Tabela ${TABLE_NAME} já existe. Nada a fazer.`);
-      return;
-    }
-
-    // Cria tabela
-    await dynamoDB.createTable(params).promise();
-    console.log(`🚀 Tabela ${TABLE_NAME} criada com sucesso!`);
-  } catch (error) {
-    console.error("❌ Erro ao criar tabela:", error);
+    const result = await client.send(command);
+    console.log("Tabela criada com sucesso:", result);
+  } catch (err) {
+    console.error("Erro ao criar tabela:", err);
   }
-};
+}
 
-// Executa a função
-createTable();
+createCouponsTable();
