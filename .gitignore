@@ -79,6 +79,7 @@ web_modules/
 out
 
 fluxo-execução.yaml
+db.js
 
 # Nuxt.js build / generate output
 .nuxt

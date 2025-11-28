@@ -4,8 +4,9 @@
   "description": "",
   "main": "test.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "spin-up": "node spin-up.js",
+  "teardown": "node teardown.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
