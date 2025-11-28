@@ -1,8 +1,8 @@
 import { exec } from "child_process";
-import { createCouponsTable } from "./infra/create-tables.js";
-import { configureTTL } from "./infra/ttl.js";
+import { createCouponsTable } from "../src/infra/create-tables.js";
+import { configureTTL } from "../src/infra/ttl.js";
 import { seed } from "./seed.js";
-import { waitForDynamoReady } from "./waitForDynamo.js";
+import { waitForDynamoReady } from "./utils/wait-for-db.js";
 import { teardown } from "./teardown.js";
 
 export async function waitForTableActive(tableName, timeout = 30000) {
@@ -69,5 +69,3 @@ async function spinUp() {
     console.error("❌ Erro no spin-up:", err);
   }
 }
-
-spinUp();

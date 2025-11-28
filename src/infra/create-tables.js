@@ -1,6 +1,6 @@
 // src/scripts/create-table.js
 import { CreateTableCommand } from "@aws-sdk/client-dynamodb";
-import { client } from "../db.js";
+import { client } from "../config/db.js";
 
 export async function createCouponsTable() {
   const command = new CreateTableCommand({
@@ -42,5 +42,3 @@ export async function createCouponsTable() {
     console.error("Erro ao criar tabela:", err);
   }
 }
-
-createCouponsTable();

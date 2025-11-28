@@ -1,5 +1,5 @@
 import { UpdateTimeToLiveCommand } from "@aws-sdk/client-dynamodb";
-import { client } from "../db.js";
+import { client } from "../config/db.js";
 
 export async function configureTTL() {
   const command = new UpdateTimeToLiveCommand({
@@ -17,5 +17,3 @@ export async function configureTTL() {
     console.error("Erro ao configurar TTL:", err);
   }
 }
-
-configureTTL();

@@ -1,6 +1,6 @@
-// src/scripts/wait-for-dynamo.js
+// scripts/utils/wait-for-db.js
 import { ListTablesCommand } from "@aws-sdk/client-dynamodb";
-import { client } from "./db.js";
+import { client } from "../../src/config/db.js";
 
 export async function waitForDynamoReady(timeout = 30000) {
   const start = Date.now();

@@ -1,6 +1,6 @@
 // src/scripts/seed.js
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { client } from "./db.js"; // importa o client já configurado
+import { client } from "../src/config/db.js"; // importa o client já configurado
 
 // Cria o DocumentClient a partir do client
 const docClient = DynamoDBDocumentClient.from(client);
