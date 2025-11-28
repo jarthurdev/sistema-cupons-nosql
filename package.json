@@ -1,16 +1,29 @@
 {
   "name": "sistema-cupons",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sistema de cupons com DynamoDB",
   "main": "test-read.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "spin-up": "node ./scripts/spin-up.js",
-    "teardown": "node ./scripts/teardown.js"
+    "spin-up": "node scripts/spin-up.js",
+    "teardown": "node scripts/teardown.js",
+    "seed": "node scripts/seed.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarthurdev/sistema-cupons-nosql.git"
+  },
+  "keywords": [
+    "dynamodb",
+    "nosql",
+    "nodejs"
+  ],
+  "author": "João Arthur",
+
+  "contributors": [
+    "Arthur Henrique arthurworkingonfire@gmail.com (https://github.com/arthurhtech)"
+  ],
+
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.940.0",
