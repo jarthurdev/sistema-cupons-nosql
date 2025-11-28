@@ -69,3 +69,8 @@ async function spinUp() {
     console.error("❌ Erro no spin-up:", err);
   }
 }
+
+// Permite rodar isoladamente
+if (process.argv[1].endsWith("spin-up.js")) {
+  spinUp();
+}
