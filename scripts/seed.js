@@ -1,13 +1,8 @@
 // src/scripts/seed.js
-import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { client } from "../src/config/db.js"; // importa o client já configurado
 import { CouponModel } from "../src/models/coupon.js";
 
-// Cria o DocumentClient a partir do client
-const docClient = DynamoDBDocumentClient.from(client);
-
 // Dados iniciais
-async function runSeed() {
+export async function runSeed() {
   try {
     console.log("🌱 Criando cupons de teste...");
 
@@ -34,3 +29,5 @@ async function runSeed() {
     console.error("❌ Erro:", error.message);
   }
 }
+
+runSeed();

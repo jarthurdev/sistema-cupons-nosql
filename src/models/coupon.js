@@ -1,6 +1,9 @@
 // src/models/Coupon.js
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { client } from "../config/db.js";
+
+const docClient = DynamoDBDocumentClient.from(client);
 
 export class CouponModel {
   static TABLE_NAME = "Coupons";
@@ -40,12 +43,12 @@ export class CouponModel {
     const command = new PutCommand({
       TableName: this.TABLE_NAME,
       Item: item,
-      // Garante que não sobrescreve um cupom que já existe com esse código
       ConditionExpression: "attribute_not_exists(couponId)"
     });
 
     try {
-      await client.send(command);
+      // Usa o DocumentClient para enviar o comando
+      await docClient.send(command); 
       console.log(`✅ Cupom ${item.couponId} criado!`);
       return item;
     } catch (error) {
