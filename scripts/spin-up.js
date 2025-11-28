@@ -1,7 +1,7 @@
 import { exec } from "child_process";
 import { createCouponsTable } from "../src/infra/create-tables.js";
 import { configureTTL } from "../src/infra/ttl.js";
-import { seed } from "./seed.js";
+import { runSeed } from "./seed.js";
 import { waitForDynamoReady } from "./utils/wait-for-db.js";
 import { teardown } from "./teardown.js";
 
@@ -63,7 +63,7 @@ async function spinUp() {
     await waitForDynamoReady();
     await createCouponsTable();
     await configureTTL();
-    await seed();
+    await runSeed();
     console.log("🎉 Spin-up completo! DynamoDB pronto para uso.");
   } catch (err) {
     console.error("❌ Erro no spin-up:", err);
