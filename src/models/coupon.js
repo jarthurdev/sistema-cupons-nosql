@@ -78,8 +78,8 @@ export class CouponModel {
   }
 
   static async getByStatus(statusTarget) {
-    // Como não temos índice de Status puro, usamos Scan com Filter
-    // (Em produção com milhões de dados isso é lento, mas para faculdade é perfeito)
+    // Usando Scan para filtrar por status
+    // Note: Scan pode ser custoso para grandes tabelas
     const command = new ScanCommand({
       TableName: this.TABLE_NAME,
       FilterExpression: "#st = :s",
@@ -87,6 +87,15 @@ export class CouponModel {
       ExpressionAttributeValues: { ":s": statusTarget }
     });
 
+    const result = await docClient.send(command);
+    return result.Items || [];
+  }
+
+  static async listAll() {
+    const command = new ScanCommand({
+      TableName: this.TABLE_NAME
+    });
+    
     const result = await docClient.send(command);
     return result.Items || [];
   }
