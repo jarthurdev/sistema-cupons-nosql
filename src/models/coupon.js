@@ -7,7 +7,6 @@ import {
   ScanCommand,
   DynamoDBDocumentClient 
 } from "@aws-sdk/lib-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { client } from "../config/db.js";
 
 const docClient = DynamoDBDocumentClient.from(client);
@@ -116,5 +115,16 @@ export class CouponModel {
     const result = await docClient.send(command);
     console.log(`🔄 Status de ${couponId} alterado para: ${newStatus}`);
     return result.Attributes;
+  }
+
+  static async delete(couponId) {
+    const command = new DeleteCommand({
+      TableName: this.TABLE_NAME,
+      Key: { couponId: couponId.toUpperCase() }
+    });
+
+    await docClient.send(command);
+    console.log(`🗑️ Cupom ${couponId} removido.`);
+    return true;
   }
 }

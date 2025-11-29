@@ -2,11 +2,12 @@
   "name": "sistema-cupons",
   "version": "1.0.0",
   "description": "Sistema de cupons com DynamoDB",
-  "main": "test-read.js",
+  "main": "test.js",
   "scripts": {
     "spin-up": "node scripts/spin-up.js",
     "teardown": "node scripts/teardown.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "test:crud": "node scripts/test-crud.js"
   },
   "repository": {
     "type": "git",
