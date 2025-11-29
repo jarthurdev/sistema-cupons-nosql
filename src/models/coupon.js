@@ -99,4 +99,22 @@ export class CouponModel {
     const result = await docClient.send(command);
     return result.Items || [];
   }
+
+  static async updateStatus(couponId, newStatus) {
+    const command = new UpdateCommand({
+      TableName: this.TABLE_NAME,
+      Key: { couponId: couponId.toUpperCase() },
+      // UpdateExpression: Define o que será atualizado
+      UpdateExpression: "set #st = :s",
+      // Names: Mapeia o nome do atributo
+      ExpressionAttributeNames: { "#st": "status" },
+      // Values: Define os novos valores
+      ExpressionAttributeValues: { ":s": newStatus },
+      ReturnValues: "ALL_NEW" // Retorna o objeto atualizado
+    });
+
+    const result = await docClient.send(command);
+    console.log(`🔄 Status de ${couponId} alterado para: ${newStatus}`);
+    return result.Attributes;
+  }
 }
