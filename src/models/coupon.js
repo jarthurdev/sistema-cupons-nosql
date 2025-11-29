@@ -1,5 +1,12 @@
 // src/models/Coupon.js
-import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { 
+  PutCommand, 
+  GetCommand, 
+  UpdateCommand, 
+  DeleteCommand, 
+  ScanCommand,
+  DynamoDBDocumentClient 
+} from "@aws-sdk/lib-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { client } from "../config/db.js";
 
@@ -59,4 +66,16 @@ export class CouponModel {
       throw error;
     }
   }
+
+  static async getById(couponId) {
+    const command = new GetCommand({
+      TableName: this.TABLE_NAME,
+      Key: { couponId: couponId.toUpperCase() }
+    });
+
+    const result = await docClient.send(command);
+    return result.Item || null;
+  }
+
+  
 }
