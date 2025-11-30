@@ -1,5 +1,5 @@
 import { GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { client } from "./src/config/db.js"; // Caminho corrigido
+import { client } from "../../src/config/db.js"; // Caminho corrigido
 
 const docClient = DynamoDBDocumentClient.from(client);
 
