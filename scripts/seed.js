@@ -1,5 +1,6 @@
 // src/scripts/seed.js
-import { CouponModel } from "../src/controller/coupon.js";
+import { CouponModel } from '../src/models/Coupon.js';
+
 
 // Dados iniciais
 export async function runSeed() {

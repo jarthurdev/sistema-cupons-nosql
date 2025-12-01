@@ -1,4 +1,4 @@
-import { CouponModel } from "../src/controller/coupon.js";
+import { CouponModel } from '../src/models/Coupon.js';
 
 async function runTest() {
   const TEST_CODE = "TESTE_CRUD_2025";
