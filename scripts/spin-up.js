@@ -45,9 +45,7 @@ async function startDynamoDB() {
   console.log("⚙️ Removendo container antigo (se houver)...");
   try {
     await runCommand("docker rm -f dynamodb-local");
-  } catch {
-    // ignora erros
-  }
+  } catch {}
 
   console.log("⏳ Iniciando DynamoDB Local...");
   await runCommand("docker run -d -p 8000:8000 --name dynamodb-local amazon/dynamodb-local");
@@ -58,7 +56,7 @@ async function startDynamoDB() {
 
 async function spinUp() {
   try {
-    await teardown(); // garante um ambiente limpo
+    await teardown();
     await startDynamoDB();
     await waitForDynamoReady();
     await createCouponsTable();

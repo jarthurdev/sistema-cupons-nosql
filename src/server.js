@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { CouponModel } from './models/Coupon.js';
+import { CouponModel } from './models/coupon.js';
 
 const app = express();
 const PORT = 3000;

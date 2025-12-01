@@ -1,6 +1,4 @@
-// src/scripts/seed.js
-import { CouponModel } from '../src/models/Coupon.js';
-
+import { CouponModel } from '../src/models/coupon.js';
 
 // Dados iniciais
 export async function runSeed() {
@@ -13,7 +11,7 @@ export async function runSeed() {
       type: "percentage",
       value: 10,
       maxUsage: 1000,
-      validityHours: 48 // 2 dias
+      validityHours: 48
     });
 
     await CouponModel.create({
@@ -21,7 +19,7 @@ export async function runSeed() {
       description: "Desconto fixo para Vips",
       type: "fixed",
       value: 50.00,
-      maxUsage: 5, // Apenas 5 pessoas podem usar (Escassez)
+      maxUsage: 5, 
       validityHours: 24
     });
 
@@ -30,5 +28,3 @@ export async function runSeed() {
     console.error("❌ Erro:", error.message);
   }
 }
-
-runSeed();

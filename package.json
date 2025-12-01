@@ -4,6 +4,7 @@
   "description": "Sistema de cupons com DynamoDB",
   "main": "test.js",
   "scripts": {
+    "server": "node src/server.js",
     "spin-up": "node scripts/spin-up.js",
     "teardown": "node scripts/teardown.js",
     "seed": "node scripts/seed.js",
@@ -19,15 +20,15 @@
     "nodejs"
   ],
   "author": "João Arthur",
-
   "contributors": [
     "Arthur Henrique arthurworkingonfire@gmail.com (https://github.com/arthurhtech)"
   ],
-
   "license": "MIT",
   "type": "module",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.940.0",
-    "@aws-sdk/lib-dynamodb": "^3.940.0"
+    "@aws-sdk/lib-dynamodb": "^3.940.0",
+    "cors": "^2.8.5",
+    "express": "^5.2.0"
   }
 }

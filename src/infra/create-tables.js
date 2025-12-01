@@ -1,4 +1,3 @@
-// src/scripts/create-table.js
 import { CreateTableCommand } from "@aws-sdk/client-dynamodb";
 import { client } from "../config/db.js";
 

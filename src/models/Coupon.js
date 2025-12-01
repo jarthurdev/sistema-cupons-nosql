@@ -1,4 +1,3 @@
-// src/models/Coupon.js
 import { 
   PutCommand, 
   GetCommand, 
@@ -16,15 +15,17 @@ export class CouponModel {
 
   /**
    * Cria um novo cupom no banco.
-   * @param {Object} data - Dados do cupom
+   * @param {Object} data [- Dados do cupom]
    */
+
+
   static async create(data) {
     const now = new Date();
     const vencimento = new Date(now.getTime() + 24 * 60 * 60 * 1000)
     
     // Define estrutura padrão
     const item = {
-      couponId: data.code.toUpperCase(), // PK é o código em maiúsculo
+      couponId: data.code.toUpperCase(),
       description: data.description,
       status: "active",
       
@@ -38,11 +39,10 @@ export class CouponModel {
       // Controle de Estoque
       quota: {
         max: data.maxUsage || 100,
-        used: 0 // Começa com 0
+        used: 0
       },
 
       createdAt: now.toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' }),
-      // Calcula TTL (expira em X dias)
       expiresAt: vencimento.toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' }),
     };
 
@@ -78,7 +78,6 @@ export class CouponModel {
 
   static async getByStatus(statusTarget) {
     // Usando Scan para filtrar por status
-    // Note: Scan pode ser custoso para grandes tabelas
     const command = new ScanCommand({
       TableName: this.TABLE_NAME,
       FilterExpression: "#st = :s",
@@ -103,13 +102,10 @@ export class CouponModel {
     const command = new UpdateCommand({
       TableName: this.TABLE_NAME,
       Key: { couponId: couponId.toUpperCase() },
-      // UpdateExpression: Define o que será atualizado
       UpdateExpression: "set #st = :s",
-      // Names: Mapeia o nome do atributo
       ExpressionAttributeNames: { "#st": "status" },
-      // Values: Define os novos valores
       ExpressionAttributeValues: { ":s": newStatus },
-      ReturnValues: "ALL_NEW" // Retorna o objeto atualizado
+      ReturnValues: "ALL_NEW" 
     });
 
     const result = await docClient.send(command);
