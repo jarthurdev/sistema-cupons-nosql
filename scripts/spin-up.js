@@ -54,7 +54,7 @@ async function startDynamoDB() {
   console.log("✅ DynamoDB Local pronto!");
 }
 
-async function spinUp() {
+export async function spinUp() {
   try {
     await teardown();
     await startDynamoDB();

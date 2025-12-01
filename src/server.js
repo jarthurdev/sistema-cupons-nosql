@@ -62,7 +62,8 @@ app.delete('/coupons/:id', async (req, res) => {
     }
 });
 
-// Iniciar Servidor
-app.listen(PORT, () => {
-    console.log(`🚀 API rodando em http://localhost:${PORT}`);
-});
+export function startServer(){
+    app.listen(PORT, () => {
+        console.log(`🚀 API rodando em http://localhost:${PORT}`);
+    })
+}
