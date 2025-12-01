@@ -30,6 +30,6 @@
     "@aws-sdk/client-dynamodb": "^3.940.0",
     "@aws-sdk/lib-dynamodb": "^3.940.0",
     "cors": "^2.8.5",
-    "express": "^5.2.0"
+    "express": "^5.2.1"
   }
 }
