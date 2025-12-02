@@ -6,7 +6,7 @@ import path from 'path';
 const docClient = DynamoDBDocumentClient.from(client);
 
 async function createDump() {
-  console.log("📦 Iniciando Dump da tabela Coupons...");
+  console.log("Iniciando Dump da tabela Coupons...");
 
   try {
     // Escaneia a tabela Coupons
@@ -25,16 +25,22 @@ async function createDump() {
       items: items
     };
 
+      // Cria o diretório de dump se não existir
+      const dumpDir = path.resolve('./dump');
+      if (!fs.existsSync(dumpDir)) {
+          fs.mkdirSync(dumpDir);
+      }
+
     // Salva o dump em um arquivo JSON
     const filePath = path.resolve('./dump/dump.json');
     fs.writeFileSync(filePath, JSON.stringify(dumpData, null, 2));
 
-    console.log(`✅ Dump criado com sucesso!`);
-    console.log(`📂 Arquivo: ${filePath}`);
-    console.log(`📊 Itens salvos: ${items.length}`);
+    console.log(`Dump criado com sucesso!`);
+    console.log(`Arquivo: ${filePath}`);
+    console.log(`Itens salvos: ${items.length}`);
 
   } catch (error) {
-    console.error("❌ Erro ao criar dump:", error);
+    console.error("Erro ao criar dump:", error);
   }
 }
 

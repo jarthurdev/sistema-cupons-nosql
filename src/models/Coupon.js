@@ -56,7 +56,7 @@ export class CouponModel {
     try {
       // Usa o DocumentClient para enviar o comando
       await docClient.send(command); 
-      console.log(`✅ Cupom ${item.couponId} criado!`);
+      console.log(`Cupom ${item.couponId} criado!`);
       return item;
     } catch (error) {
       if (error.name === "ConditionalCheckFailedException") {
@@ -109,7 +109,7 @@ export class CouponModel {
     });
 
     const result = await docClient.send(command);
-    console.log(`🔄 Status de ${couponId} alterado para: ${newStatus}`);
+    console.log(`Status de ${couponId} alterado para: ${newStatus}`);
     return result.Attributes;
   }
 
@@ -120,7 +120,7 @@ export class CouponModel {
     });
 
     await docClient.send(command);
-    console.log(`🗑️ Cupom ${couponId} removido.`);
+    console.log(`🗑Cupom ${couponId} removido.`);
     return true;
   }
 }

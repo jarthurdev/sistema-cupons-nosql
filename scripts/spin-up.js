@@ -35,24 +35,24 @@ function runCommand(cmd) {
 }
 
 async function startDynamoDB() {
-  console.log("🚀 Verificando se Docker está disponível...");
+  console.log("Verificando se Docker está disponível...");
   try {
     await runCommand("docker --version");
   } catch {
     throw new Error("Docker não encontrado. Instale Docker antes de continuar.");
   }
 
-  console.log("⚙️ Removendo container antigo (se houver)...");
+  console.log("⚙Removendo container antigo (se houver)...");
   try {
     await runCommand("docker rm -f dynamodb-local");
   } catch {}
 
   // Inicia o DynamoDB Local
-  console.log("⏳ Iniciando DynamoDB Local...");
+  console.log("Iniciando DynamoDB Local...");
   await runCommand("docker run -d -p 8000:8000 --name dynamodb-local amazon/dynamodb-local");
 
-  console.log("⏳ Aguardando porta 8000 ficar disponível...");
-  console.log("✅ DynamoDB Local pronto!");
+  console.log("Aguardando porta 8000 ficar disponível...");
+  console.log("DynamoDB Local pronto!");
 }
 
 export async function spinUp() {
@@ -63,9 +63,9 @@ export async function spinUp() {
     await createCouponsTable();
     await configureTTL();
     await runSeed();
-    console.log("🎉 Spin-up completo! DynamoDB pronto para uso.");
+    console.log("Spin-up completo! DynamoDB pronto para uso.");
   } catch (err) {
-    console.error("❌ Erro no spin-up:", err);
+    console.error("Erro no spin-up:", err);
   }
 }
 

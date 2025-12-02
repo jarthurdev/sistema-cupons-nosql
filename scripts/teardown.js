@@ -1,7 +1,7 @@
 import { exec } from "child_process";
 
 export async function teardown() {
-  console.log("🧹 Teardown: removendo container e tabelas antigas...");
+  console.log("Teardown: removendo container e tabelas antigas...");
   try {
     await runCommand("docker rm -f dynamodb-local");
   } catch {}

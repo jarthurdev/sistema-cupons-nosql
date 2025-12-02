@@ -9,7 +9,8 @@
     "spin-up": "node scripts/spin-up.js",
     "teardown": "node scripts/teardown.js",
     "seed": "node scripts/seed.js",
-    "db:dump": "node scripts/dump.js"
+    "db:dump": "node scripts/dump.js",
+    "db:restore": "node scripts/restore.js"
   },
   "repository": {
     "type": "git",

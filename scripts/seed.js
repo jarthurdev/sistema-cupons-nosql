@@ -3,7 +3,7 @@ import { CouponModel } from '../src/models/coupon.js';
 // Dados iniciais
 export async function runSeed() {
   try {
-    console.log("🌱 Criando cupons de teste...");
+    console.log("Criando cupons de teste...");
 
     await CouponModel.create({
       code: "BEMVINDO10",
@@ -23,8 +23,8 @@ export async function runSeed() {
       validityHours: 24
     });
 
-    console.log("✅ Seed finalizado!");
+    console.log("Seed finalizado!");
   } catch (error) {
-    console.error("❌ Erro:", error.message);
+    console.error("Erro:", error.message);
   }
 }

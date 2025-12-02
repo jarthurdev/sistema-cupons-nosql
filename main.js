@@ -5,7 +5,7 @@ import { startServer } from "./src/server.js";
 
 async function checkDatabaseReady() {
     try {
-        console.log("🔍 Verificando estado do banco de dados...");
+        console.log("Verificando estado do banco de dados...");
 
         // Tenta listar as tabelas
         const command = new ListTablesCommand({});
@@ -15,14 +15,14 @@ async function checkDatabaseReady() {
 
         // Verifica se a tabela 'Coupons' existe
         if (tables.includes("Coupons")) {
-            console.log("✅ Tabelas encontradas. O banco parece estar pronto.");
+            console.log("Tabelas encontradas. O banco parece estar pronto.");
             return true;
         } else {
-            console.log("⚠️ Tabela 'Coupons' não encontrada.");
+            console.log("⚠Tabela 'Coupons' não encontrada.");
             return false;
         }
     } catch (error) {
-        console.log("❌ Não foi possível conectar ao banco (pode estar desligado).");
+        console.log("Não foi possível conectar ao banco (pode estar desligado).");
         return false;
     }
 }
@@ -32,12 +32,12 @@ async function main() {
     const isReady = await checkDatabaseReady();
 
     if (!isReady) {
-        console.log("⚙️ Iniciando configuração de ambiente (Spin-up)...");
+        console.log("⚙Iniciando configuração de ambiente (Spin-up)...");
         await spinUp();
     }
 
     // Independente do que aconteceu acima, inicia o servidor
-    console.log("🚀 Inicializando servidor...");
+    console.log("Inicializando servidor...");
     startServer();
 }
 
