@@ -28,7 +28,7 @@ async function checkDatabaseReady() {
 }
 
 async function main() {
-    // 1. Verifica se precisa rodar o spin-up
+    // Verifica se precisa rodar o spin-up
     const isReady = await checkDatabaseReady();
 
     if (!isReady) {
@@ -36,7 +36,7 @@ async function main() {
         await spinUp();
     }
 
-    // 2. Independente do que aconteceu acima, inicia o servidor
+    // Independente do que aconteceu acima, inicia o servidor
     console.log("🚀 Inicializando servidor...");
     startServer();
 }

@@ -47,6 +47,7 @@ async function startDynamoDB() {
     await runCommand("docker rm -f dynamodb-local");
   } catch {}
 
+  // Inicia o DynamoDB Local
   console.log("⏳ Iniciando DynamoDB Local...");
   await runCommand("docker run -d -p 8000:8000 --name dynamodb-local amazon/dynamodb-local");
 

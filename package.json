@@ -8,7 +8,8 @@
     "server": "node src/server.js",
     "spin-up": "node scripts/spin-up.js",
     "teardown": "node scripts/teardown.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "db:dump": "node scripts/dump.js"
   },
   "repository": {
     "type": "git",
